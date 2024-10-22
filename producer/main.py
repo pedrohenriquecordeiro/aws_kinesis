@@ -19,7 +19,7 @@ def generate_random_data():
     return {
         "user_id": generate_random_numeric_string(10),
         "action": "click",
-        "timestamp": fake.date_time_this_year(),
+        "timestamp": str(fake.date_time_this_year()),
         "details": {
             "page": fake.chrome(),
             "uri": fake.uri_page()
