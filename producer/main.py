@@ -1,12 +1,27 @@
-import boto3
-import json
+import boto3 , json , os
 from dotenv import load_dotenv
-import os
+from faker import Faker
 
 # Load environment variables from the .env file
 load_dotenv()
 
-def send_data_to_firehose(stream_name, data):
+def generate_random_data():
+    """Generate random data for the CSV."""
+
+    logging.info(f"Generated random data ... ")
+
+    return {
+        "user_id": generate_random_numeric_string(10),
+        "action": "click",
+        "timestamp": fake.date_time_this_year(),
+        "details": {
+            "page": fake.chrome(),
+            "uri": fake.uri_page()
+        }
+    }
+
+
+def send_data_to_firehose(stream_name):
     # Fetch AWS credentials from environment variables
     aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
     aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -21,7 +36,7 @@ def send_data_to_firehose(stream_name, data):
     )
 
     # Prepare the data to send
-    json_data = json.dumps(data).encode('utf-8')
+    json_data = json.dumps(generate_random_data()).encode('utf-8')
 
     try:
         # Send data to the Firehose stream
@@ -43,18 +58,7 @@ def send_data_to_firehose(stream_name, data):
 
 if __name__ == "__main__":
     # Replace with your actual Firehose stream name
-    firehose_stream_name = "your-firehose-stream-name"
-
-    # Example data to send
-    data_record = {
-        "user_id": 123,
-        "action": "click",
-        "timestamp": "2024-10-21T10:00:00Z",
-        "details": {
-            "page": "home",
-            "button_id": "signup"
-        }
-    }
+    firehose_stream_name = "PUT-S3-HwC6m"
 
     # Send the data to the Firehose stream
-    send_data_to_firehose(firehose_stream_name, data_record)
+    send_data_to_firehose(firehose_stream_name)
