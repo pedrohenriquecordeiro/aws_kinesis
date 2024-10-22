@@ -71,8 +71,8 @@ if __name__ == "__main__":
         try:
             send_data_to_firehose(firehose_stream_name)
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            print(f"An error occurred: {e}")
 
         time_to_sleep = random.randint(1, 10)
-        logging.info(f"Sleeping for {time_to_sleep} seconds before the next iteration")
+        print(f"Sleeping for {time_to_sleep} seconds before the next iteration")
         time.sleep(time_to_sleep)
