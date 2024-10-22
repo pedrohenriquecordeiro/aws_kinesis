@@ -1,4 +1,4 @@
-import boto3 , json , os
+import boto3 , csv , random , time , os , logging , string , json
 from dotenv import load_dotenv
 from faker import Faker
 
@@ -25,7 +25,7 @@ def send_data_to_firehose(stream_name):
     # Fetch AWS credentials from environment variables
     aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
     aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-    aws_region = os.getenv('AWS_REGION')
+    aws_region = 'us-east-2'
 
     # Initialize a Firehose client with credentials from .env file
     firehose_client = boto3.client(
