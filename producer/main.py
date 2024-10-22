@@ -29,8 +29,8 @@ def generate_random_data():
 
 def send_data_to_firehose(stream_name):
     # Fetch AWS credentials from environment variables
-    aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
-    aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+    aws_access_key_id = os.getenv('access_key_id')
+    aws_secret_access_key = os.getenv('secret_access_key')
     aws_region = 'us-east-2'
 
     # Initialize a Firehose client with credentials from .env file
