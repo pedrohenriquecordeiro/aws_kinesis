@@ -21,8 +21,8 @@ def generate_random_data():
         "action": "click",
         "timestamp": str(fake.date_time_this_year()),
         "details": {
-            "page": fake.chrome(),
-            "uri": fake.uri_page()
+            "page": fake.url(),
+            "uri": fake.uri()
         }
     }
 
