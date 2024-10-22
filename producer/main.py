@@ -4,6 +4,7 @@ from faker import Faker
 
 # Load environment variables from the .env file
 load_dotenv()
+fake = Faker()
 
 def generate_random_numeric_string(length):
     numbers = string.digits  # '0123456789'
